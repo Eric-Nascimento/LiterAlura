@@ -4,25 +4,28 @@ import br.com.alura.LiterAlura.ApiGutendex.Gutendex;
 import br.com.alura.LiterAlura.Livro.Livro;
 import br.com.alura.LiterAlura.Livro.LivroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class Principal {
 
     private final Scanner leitura = new Scanner(System.in);
     private final Gutendex gutendex;
+    private final LivroService livroService;
 
     @Autowired
-    private LivroService livroService;
-
-    public Principal(Gutendex gutendex) {
+    public Principal(Gutendex gutendex, LivroService livroService) {
         this.gutendex = gutendex;
+        this.livroService = livroService;
     }
 
-    public void exibeMenu(){
+    public void exibeMenu() {
         int opcao = -1;
 
-        while (opcao != 9){
+        while (opcao != 9) {
             var menu = """
                     \n*** Aplicativo de Literatura ***
                     
@@ -40,40 +43,27 @@ public class Principal {
             opcao = leitura.nextInt();
             leitura.nextLine();
 
-            switch (opcao){
-                case 1:
-                    buscarLivro();
-                    break;
-                case 2:
-                    listarLivros();
-                    break;
-                case 3:
-                    listarAutores();
-                    break;
-                case 4:
-                    listarAutoresVivos();
-                    break;
-                case 5:
-                    listarLivrosIdioma();
-                    break;
-
-                case 9:
-                    System.out.println("Programa encerrado!");
-                    break;
+            switch (opcao) {
+                case 1 -> buscarLivro();
+                case 2 -> listarLivros();
+                case 3 -> listarAutores();
+                case 4 -> listarAutoresVivos();
+                case 5 -> listarLivrosIdioma();
+                case 9 -> System.out.println("Programa encerrado!");
             }
         }
     }
 
     private void listarLivrosIdioma() {
-        System.out.println("listará aqui o listar livros idioma ");
+        System.out.println("Listará aqui o listar livros idioma.");
     }
 
     private void listarAutoresVivos() {
-        System.out.println("listará aqui o Listar autores vivos");
+        System.out.println("Listará aqui o listar autores vivos.");
     }
 
     private void listarAutores() {
-        System.out.println("listará aqui o listar todos os autores cadastrados");
+        System.out.println("Listará aqui o listar todos os autores cadastrados.");
     }
 
     private void listarLivros() {
